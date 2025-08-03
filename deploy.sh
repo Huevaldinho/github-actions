@@ -22,12 +22,12 @@ fi
 
 # Stop and remove existing container if running
 echo "Stopping existing container..."
-docker stop myapp-container 2>/dev/null
-docker rm myapp-container 2>/dev/null
+docker stop github-actions-testing 2>/dev/null
+docker rm github-actions-testing 2>/dev/null
 
 # Run the Docker container with correct port mapping
 echo "Running Docker container..."
-docker run -d --name myapp-container -p ${EXPERTAL_PORT}:8000 ${IMAGE_NAME}:${IMAGE_TAG}
+docker run -d --name github-actions-testing -p ${EXPERTAL_PORT}:8000 ${IMAGE_NAME}:${IMAGE_TAG}
 
 # Check if container is running
 if [ $? -eq 0 ]; then
