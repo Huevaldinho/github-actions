@@ -22,7 +22,7 @@ jobs:
 
       - name: Verify container is running
         run: |
-          curl -f http://localhost:8080/health || exit 1
+          curl -f http://localhost:3000/health || exit 1
           echo "Waiting for 10 seconds for the container to start..."
           sleep 10
           docker ps
