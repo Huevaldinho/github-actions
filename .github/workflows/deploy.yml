@@ -1,0 +1,29 @@
+name: Deploy on Dev Push
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-run-in-runner:
+    name: Build and Run Container
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make deploy script executable
+        run: chmod +x deploy.sh
+
+      - name: Execute deployment script
+        run: ./deploy.sh
+
+      - name: Verify container is running
+        run: |
+          echo "Waiting for 10 seconds for the container to start..."
+          sleep 10
+          docker ps
+          echo -e "\n\n--- Container Logs ---"
+          docker logs myapp-container

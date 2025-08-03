@@ -1,0 +1,66 @@
+{
+  "mocks": [
+    {
+      "id": "1",
+      "name": "User Login Mock",
+      "description": "Mocks the successful login of a user.",
+      "method": "POST",
+      "path": "/api/v1/login",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+          "userId": "user123",
+          "message": "Login successful"
+        }
+      }
+    },
+    {
+      "id": "2",
+      "name": "Get Products Mock",
+      "description": "Mocks retrieving a list of products.",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "productId": "prod001",
+            "name": "Laptop Pro",
+            "price": 1200.00,
+            "currency": "USD"
+          },
+          {
+            "productId": "prod002",
+            "name": "Wireless Mouse",
+            "price": 25.50,
+            "currency": "USD"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "name": "Create Order Mock",
+      "description": "Mocks the creation of a new order.",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "orderId": "order123",
+          "message": "Order created successfully"
+        }
+      }
+    }
+  ]
+}
