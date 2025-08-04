@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        
 
       - name: Make deploy script executable
         run: chmod +x deploy.sh

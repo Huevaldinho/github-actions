@@ -7,6 +7,11 @@ EXPERTAL_PORT="3000"
 # Extract base image from Dockerfile
 BASE_IMAGE=$(grep ^FROM Dockerfile | awk '{print $2}')
 
+#!/bin/bash
+set -e  # hace que falle al primer error
+set -x  # imprime cada comando antes de ejecutarlo
+
+
 echo "Pulling base image: ${BASE_IMAGE}..."
 docker pull ${BASE_IMAGE}
 
@@ -19,6 +24,8 @@ if [ $? -ne 0 ]; then
   echo "Docker build failed. Exiting."
   exit 1
 fi
+
+
 
 # Stop and remove existing container if running
 echo "Stopping existing container..."
