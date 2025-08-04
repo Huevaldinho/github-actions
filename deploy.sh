@@ -15,18 +15,6 @@ set -x  # imprime cada comando antes de ejecutarlo
 echo "Pulling base image: ${BASE_IMAGE}..."
 docker pull ${BASE_IMAGE}
 
-# Build the Docker image
-echo "Building Docker image..."
-docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-
-# Check if build was successful
-if [ $? -ne 0 ]; then
-  echo "Docker build failed. Exiting."
-  exit 1
-fi
-
-
-
 # Stop and remove existing container if running
 echo "Stopping existing container..."
 docker stop github-actions-testing 2>/dev/null
