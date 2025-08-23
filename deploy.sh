@@ -11,7 +11,6 @@ BASE_IMAGE=$(grep ^FROM Dockerfile | awk '{print $2}')
 set -e  # hace que falle al primer error
 set -x  # imprime cada comando antes de ejecutarlo
 
-
 echo "Pulling base image: ${BASE_IMAGE}..."
 docker pull ${BASE_IMAGE}
 

@@ -40,18 +40,10 @@ def _save_mocks_unsafe(data: dict):
     """Saves mock data to the JSON file without acquiring a lock."""
     MOCKS_FILE.write_text(json.dumps(data, indent=4))
 
-@app.on_event("startup")
-def on_startup():
-    """Ensure the mocks file exists on startup."""
-    with file_lock:
-        if not MOCKS_FILE.exists():
-            logger.info(f"Mocks file not found. Creating a new one at {MOCKS_FILE}")
-            _save_mocks_unsafe({})
-
 @app.get("/health", tags=["Health"])
 async def health_check():
     """Health check endpoint providing a simple status."""
-    return {"status": "healthy"}
+    return {"status": "healthy","status_code":200}
 
 @app.get("/data", response_model=Data, tags=["Data"])
 async def get_data():
