@@ -17,9 +17,9 @@ MOCKS_FILE = Path("./data/mocks.json")
 file_lock = threading.Lock()
 
 app = FastAPI(
-    title="Mock Data API",
-    description="An API to get and post mock data, stored in a JSON file.",
-    version="1.0.0",
+    title = "Mock Data API",
+    description = "An API to get and post mock data, stored in a JSON file.",
+    version = "1.0.0",
 )
 
 def _load_mocks_unsafe() -> dict:
@@ -35,28 +35,31 @@ def _load_mocks_unsafe() -> dict:
     except json.JSONDecodeError:
         logger.error(f"Could not decode JSON from {MOCKS_FILE}. Returning empty dict.")
         return {}
+    except FileNotFoundError:
+        logger.error(f"File {MOCKS_FILE} not found. Returning empty dict.")
+        return {}
 
-def _save_mocks_unsafe(data: dict):
+def _save_mocks_unsafe(data : dict):
     """Saves mock data to the JSON file without acquiring a lock."""
-    MOCKS_FILE.write_text(json.dumps(data, indent=4))
+    MOCKS_FILE.write_text(json.dumps(data, indent = 4))
 
 @app.get("/health", tags=["Health"])
 async def health_check():
     """Health check endpoint providing a simple status."""
-    return {"status": "healthy","status_code":200}
+    return {"status": "healthy"}
 
-@app.get("/data", response_model=Data, tags=["Data"])
+@app.get("/data", response_model = Data, tags = ["Data"])
 async def get_data():
     """Retrieve all mock data."""
     with file_lock:
         return _load_mocks_unsafe()
 
-@app.post("/data", status_code=status.HTTP_200_OK)
+@app.post("/data", status_code = status.HTTP_200_OK)
 async def update_data():
     """Update or create a data entry."""
     with file_lock:
         mocks = _load_mocks_unsafe()
-        test= "Hola"
-        mocks[test] = test
+        test= "data_updated"
+        mocks["data"] = test
         _save_mocks_unsafe(mocks)
     return {"message": "Data updated successfully", "data": test}

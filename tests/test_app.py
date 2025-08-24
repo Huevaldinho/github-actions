@@ -51,13 +51,14 @@ def test_update_and_get_data(client: TestClient):
     """
     # 1. Update the data
     post_response = client.post("/data")
+    update = "data_updated"
     assert post_response.status_code == 200
     assert post_response.json() == {
         "message": "Data updated successfully",
-        "data": "Hola",
+        "data": update,
     }
 
     # 2. Retrieve the data to verify the update
     get_response = client.get("/data")
     assert get_response.status_code == 200
-    assert get_response.json() == {"status": "healthy"}
+    assert get_response.json() == {"data": update}

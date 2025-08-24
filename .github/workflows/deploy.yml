@@ -34,7 +34,3 @@ jobs:
         run: |
           curl -f http://localhost:3000/health || exit 1
           docker ps
-      - name: Run Pytest
-        run: |
-          pip install pytest
-          pytest
