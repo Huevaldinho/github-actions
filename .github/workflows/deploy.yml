@@ -1,0 +1,36 @@
+name: Deploy on Dev Push
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build-and-run-in-runner:
+    name: Build and Run Container
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: my-app:latest
+          load: true  
+      - name: Make deploy script executable
+        run: chmod +x deploy.sh
+      - name: Run container
+        run: |
+         docker run -d -p 3000:8000 --name my-app my-app:latest
+      - name: View container logs
+        run: docker logs my-app
+      - name: Waitinf for container to start
+        run: |
+          echo "Waiting for 10 seconds for the container to start..."
+          sleep 10
+      - name: Verify container is running
+        run: |
+          curl -f http://localhost:3000/health || exit 1
+          docker ps
