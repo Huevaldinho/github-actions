@@ -21,7 +21,7 @@ This project is a hands-on learning journey through modern DevOps and cloud-nati
 - [ ] Set up a CI workflow (`ci.yml`) to lint, test, and build on Pull Requests
 - [ ] Post test results and coverage as a comment in Pull Requests
 
-#### ⬜ Phase 2: IaC & Continuous Deployment
+#### ⬜ Phase 2: IaC & Continuous Integration & Deployment
 - [ ] Use Terraform to provision a cloud VM for a self-hosted GitHub Actions runner
 - [ ] Install the runner and Docker daemon on the provisioned VM
 - [ ] Create a CD workflow (`deploy.yml`) that triggers on merge to `main`

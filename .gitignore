@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / C extensions
-__pycache__/
+*__pycache__*
 *.pyc
 *.pyo
 *.pyd
@@ -10,6 +10,9 @@ report*.xml
 
 # Virtual environment
 venv/
+env/
+.env    
+.venv
 
 # IDE / Editor specific
 .vscode/

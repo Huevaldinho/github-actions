@@ -1,9 +1,10 @@
-from src.app import app
 from pathlib import Path
 
 import sys
 import logging
 
+from src.app import app
+from src.config.Base import settings
 ROOT_DIR = Path(__file__).resolve().parent
 
 sys.path.append(str(ROOT_DIR))
@@ -16,4 +17,4 @@ logger.info(f"Running on Python {sys.version}")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host=settings.host, port=settings.port)

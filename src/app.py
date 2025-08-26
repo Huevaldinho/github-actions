@@ -1,7 +1,7 @@
 from fastapi import FastAPI, status
 from pathlib import Path
 
-from models.Data import Data 
+from .models.Data import Data
 
 import json
 import threading
@@ -16,10 +16,12 @@ MOCKS_FILE = Path("./data/mocks.json")
 # Using a lock to prevent race conditions when accessing the JSON file from concurrent requests.
 file_lock = threading.Lock()
 
+
 app = FastAPI(
     title = "Mock Data API",
     description = "An API to get and post mock data, stored in a JSON file.",
     version = "1.0.0",
+    
 )
 
 def _load_mocks_unsafe() -> dict:

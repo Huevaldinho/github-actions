@@ -1,0 +1,15 @@
+name: Build Image and Push to Repository
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Make deploy script executable
+        run: chmod +x deploy.sh
+      - name: Run deploy script
+        run: ./deploy.sh
